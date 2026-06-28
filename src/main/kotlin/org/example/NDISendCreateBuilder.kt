@@ -32,7 +32,10 @@ class NDISendCreateBuilder {
     fun toNative(arena: Arena, data: NDISendCreate): MemorySegment {
         val segment = arena.allocate(layout)
         val namePtr = arena.allocateFrom(data.name)
-        val groupsPtr = data.groups?.let(arena::allocateFrom) ?: MemorySegment.NULL
+        val groupsPtr = data.groups
+            .let { if(it.isEmpty()) { null } else { it.joinToString(",") } }
+            .let (arena::allocateFrom)
+            ?: MemorySegment.NULL
 
         nameHandle.set(segment, 0, namePtr)
         groupsHandle.set(segment, 0, groupsPtr)

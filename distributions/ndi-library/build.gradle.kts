@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     `maven-publish`
     kotlin("jvm") version "2.3.21"
@@ -19,16 +21,22 @@ tasks.register<JavaExec>("getVersion") {
     args("C:\\Program Files\\NDI\\NDI 6 Runtime\\v6")
 }
 
-var windowsJar = tasks.register<Jar>("windowsJar") {
-    archiveClassifier.set("windows-x86_64")
-    group = "build"
-    from("C:\\Program Files\\NDI\\NDI 6 Runtime\\v6\\Processing.NDI.Lib.x64.dll")
+val jarTasks = file("ndi-info").listFiles().map {
+    val props = Properties()
+    it.inputStream().use { props.load(it) }
+    val classifier = it.name.replace(".properties", "")
+    return@map tasks.register<Jar>("jar-${classifier}") {
+        archiveClassifier.set(classifier)
+        group = "build"
+        version = props["version"].toString()
+        from(props["path"])
+    }
 }
 
 publishing {
     publications {
         create<MavenPublication>("ndi-library") {
-            artifact(windowsJar)
+            jarTasks.forEach { task -> artifact(task) }
         }
     }
 }
@@ -36,5 +44,5 @@ publishing {
 tasks.jar { enabled = false }
 
 tasks.build {
-    dependsOn(windowsJar)
+    jarTasks.forEach { task -> dependsOn(task) }
 }

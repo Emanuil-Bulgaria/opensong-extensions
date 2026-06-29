@@ -34,7 +34,7 @@ class NDISendCreateBuilder {
         val namePtr = arena.allocateFrom(data.name)
         val groupsPtr = data.groups
             .let { if(it.isEmpty()) { null } else { it.joinToString(",") } }
-            .let (arena::allocateFrom)
+            ?.let (arena::allocateFrom)
             ?: MemorySegment.NULL
 
         nameHandle.set(segment, 0, namePtr)

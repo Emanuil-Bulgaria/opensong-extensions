@@ -1,4 +1,4 @@
-package org.example
+package bg.emanuil
 
 import java.lang.foreign.MemorySegment
 

@@ -1,5 +1,7 @@
-package org.example
+package bg.emanuil
 
+
+import bg.emanuil.ndi.*
 import org.jetbrains.skia.*
 import org.jetbrains.skiko.SkiaLayer
 import org.jetbrains.skiko.SkikoRenderDelegate
@@ -68,7 +70,6 @@ fun main() {
         NdiLibrary(arena).use { ndi ->
             ndi.initialize()
             println(ndi.version())
-
             ndi.sendCreate(NDISendCreate("Test NDI")).use { instance ->
                 val width = 1920
                 val height = 1080

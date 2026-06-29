@@ -18,7 +18,7 @@ tasks.register<JavaExec>("getVersion") {
 
     classpath = sourceSets.named("main").get().runtimeClasspath
 
-    mainClass.set("org.example.MainKt")
+    mainClass.set("bg.emanuil.ndi.discovory.MainKt")
 
     args("C:\\Program Files\\NDI\\NDI 6 Runtime\\v6")
 }
@@ -26,7 +26,7 @@ tasks.register<JavaExec>("getVersion") {
 val jarTasks = file("ndi-info").listFiles().map {
     val props = Properties()
     it.inputStream().use { props.load(it) }
-    val packageName = "org.example"
+    val packageName = "bg.emanuil.ndi.discovory"
     val classifier = it.name.replace(".properties", "")
     val generatedClassName =
         "NDIProvider${props["platform"]}V${props["version"].toString().replace(".", "D")}"
@@ -43,7 +43,7 @@ val jarTasks = file("ndi-info").listFiles().map {
             val code = """
             package $packageName
             
-            import org.example.NdiProvider
+            import bg.emanuil.ndi.discovory.NdiProvider
 
             class $generatedClassName : NdiProvider(
                 version = "${props["version"]}",
@@ -59,7 +59,7 @@ val jarTasks = file("ndi-info").listFiles().map {
     val directory = layout.buildDirectory.dir("generated/resources/main")
     val generateSPI = tasks.register("generateSPI-${classifier}") {
         val file = directory.map { File(it.asFile,
-            "META-INF/services/org.example.NDILinkedLibrary") }
+            "META-INF/services/bg.emanuil.ndi.discovory.NDILinkedLibrary") }
         outputs.file(file)
         doLast {
             var actual = file.get()

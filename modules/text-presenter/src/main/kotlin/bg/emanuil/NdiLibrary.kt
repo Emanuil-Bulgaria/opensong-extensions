@@ -1,8 +1,8 @@
-package org.example
+package bg.emanuil
 
+import bg.emanuil.ndi.discovory.NDILibraryLoader
 import java.lang.foreign.*
 import java.lang.invoke.MethodHandle
-import java.nio.file.Path
 import kotlin.jvm.optionals.getOrNull
 
 class NdiLibrary (

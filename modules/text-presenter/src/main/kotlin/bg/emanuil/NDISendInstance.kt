@@ -1,9 +1,10 @@
-package org.example
+package bg.emanuil
 
 import java.lang.foreign.MemorySegment
 
 class NDISendInstance(private val pointer: MemorySegment,
-                      private val ndi: NdiLibrary) : AutoCloseable {
+                      private val ndi: NdiLibrary
+) : AutoCloseable {
 
     fun send(frame: NDIVideoFrameV2) {
         ndi.sendVideo(pointer, frame)

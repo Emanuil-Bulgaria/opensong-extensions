@@ -1,4 +1,4 @@
-package org.example
+package bg.emanuil.ndi.discovory
 
 import java.io.File
 import java.lang.foreign.Arena

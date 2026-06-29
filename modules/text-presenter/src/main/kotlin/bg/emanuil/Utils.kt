@@ -1,4 +1,4 @@
-package org.example
+package bg.emanuil
 
 object Utils {
     fun fourCC(ch0: Char, ch1: Char, ch2: Char, ch3: Char): Int =

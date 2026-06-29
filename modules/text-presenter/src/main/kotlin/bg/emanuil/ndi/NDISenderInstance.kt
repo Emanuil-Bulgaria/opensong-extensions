@@ -1,10 +1,10 @@
-package org.example.ndi
+package bg.emanuil.ndi
 
-import org.example.NDIFourCCVideoType
-import org.example.NDIFrameFormatType
-import org.example.NDISendCreate
-import org.example.NDIVideoFrameV2
-import org.example.NdiLibrary
+import bg.emanuil.NDIFourCCVideoType
+import bg.emanuil.NDIFrameFormatType
+import bg.emanuil.NDISendCreate
+import bg.emanuil.NDIVideoFrameV2
+import bg.emanuil.NdiLibrary
 import java.lang.foreign.Arena
 
 class NDISenderInstance(
@@ -38,9 +38,11 @@ class NDISenderInstance(
         try {
             NdiLibrary(arena).use { library ->
                 println(library.version())
-                library.sendCreate(NDISendCreate(
-                    name = name, groups = groups,
-                )).use { sendInstance ->
+                library.sendCreate(
+                    NDISendCreate(
+                        name = name, groups = groups,
+                    )
+                ).use { sendInstance ->
                     val bufferSize = width * height * 4L
 
                     val dataPtr = arena.allocate(bufferSize)

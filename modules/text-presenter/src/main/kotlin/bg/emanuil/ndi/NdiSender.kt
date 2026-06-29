@@ -1,4 +1,4 @@
-package org.example.ndi
+package bg.emanuil.ndi
 
 interface NdiSender {
 }

@@ -1,4 +1,4 @@
-package org.example
+package bg.emanuil
 
 enum class NDIFourCCVideoType(val code: Int) {
     UYVY(Utils.fourCC('U', 'Y', 'V', 'Y')),

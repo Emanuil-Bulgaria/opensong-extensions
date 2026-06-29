@@ -1,8 +1,6 @@
-package org.example
+package bg.emanuil.ndi.discovory
 
 import java.io.File
-import java.util.Properties
-import javax.xml.transform.Source
 
 abstract class NdiProvider(override val info: String,
                   override val platform: String,

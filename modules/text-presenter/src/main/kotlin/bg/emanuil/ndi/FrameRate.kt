@@ -1,4 +1,4 @@
-package org.example.ndi
+package bg.emanuil.ndi
 
 data class FrameRate(val N: Int, val D: Int) {
     fun frameRate(): Double = N.toDouble() / N.toDouble()

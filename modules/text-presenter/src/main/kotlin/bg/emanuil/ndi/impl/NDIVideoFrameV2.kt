@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.ndi.impl
 
 import java.lang.foreign.MemorySegment
 

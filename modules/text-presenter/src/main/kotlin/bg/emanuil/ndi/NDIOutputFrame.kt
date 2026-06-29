@@ -1,6 +1,6 @@
 package bg.emanuil.ndi
 
-import bg.emanuil.NDIFourCCVideoType
+import bg.emanuil.ndi.impl.NDIFourCCVideoType
 import java.lang.foreign.MemorySegment
 
 data class NDIOutputFrame(

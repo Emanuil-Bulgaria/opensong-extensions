@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.ndi.impl
 
 enum class NDIFrameFormatType(val code: Int) {
     PROGRESSIVE(1),

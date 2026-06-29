@@ -1,11 +1,11 @@
 package bg.emanuil.ndi
 
-import bg.emanuil.NDIFourCCVideoType
-import bg.emanuil.NDIFrameFormatType
-import bg.emanuil.NDISendCreate
-import bg.emanuil.NDISendInstance
-import bg.emanuil.NDIVideoFrameV2
-import bg.emanuil.NdiLibrary
+import bg.emanuil.ndi.impl.NDIFourCCVideoType
+import bg.emanuil.ndi.impl.NDIFrameFormatType
+import bg.emanuil.ndi.impl.NDISendCreate
+import bg.emanuil.ndi.impl.NDISendInstance
+import bg.emanuil.ndi.impl.NDIVideoFrameV2
+import bg.emanuil.ndi.impl.NdiLibrary
 import java.lang.foreign.Arena
 import java.util.concurrent.TimeUnit
 

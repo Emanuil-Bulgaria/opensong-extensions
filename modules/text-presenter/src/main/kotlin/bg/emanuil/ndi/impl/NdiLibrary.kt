@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.ndi.impl
 
 import bg.emanuil.ndi.discovory.NDILibraryLoader
 import java.lang.foreign.*

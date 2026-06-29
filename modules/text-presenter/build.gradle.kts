@@ -9,6 +9,7 @@ dependencies {
     implementation("bg.emanuil:ndi-library:6.3.2.0:windows-x86_64")
     implementation("bg.emanuil:ndi-provider:1.0-SNAPSHOT")
 //    implementation(project(":distributions:ndi-library", configuration = "windows-x86_64"))
+    implementation("com.fasterxml.woodstox:woodstox-core:7.2.1")
 
     // You MUST include the runtime for the target operating system/architecture.
     // For local development on a 64-bit Windows/Linux/Mac machine:

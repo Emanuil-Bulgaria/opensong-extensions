@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.ndi.impl
 
 data class NDISendCreate(
     val name: String,

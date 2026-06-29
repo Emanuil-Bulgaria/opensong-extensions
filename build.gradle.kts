@@ -3,10 +3,6 @@ plugins {
 }
 
 allprojects {
-    group = "org.example"
+    group = "bg.emanuil"
     version = "1.0-SNAPSHOT"
-
-    repositories {
-        mavenCentral()
-    }
 }

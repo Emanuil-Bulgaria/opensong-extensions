@@ -5,13 +5,13 @@ import org.jetbrains.skiko.SkiaLayer
 import org.jetbrains.skiko.SkikoRenderDelegate
 import java.awt.Dimension
 import java.lang.foreign.Arena
+import java.util.ServiceLoader
 import java.util.concurrent.TimeUnit
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 import kotlin.math.sin
 
 fun main() {
-
     val skiaLayer = SkiaLayer()
 
     val backgroundPaint = Paint().apply {

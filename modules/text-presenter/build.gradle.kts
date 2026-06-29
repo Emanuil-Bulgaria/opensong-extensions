@@ -6,6 +6,7 @@ dependencies {
     testImplementation(kotlin("test"))
 
     implementation("org.jetbrains.skiko:skiko-awt:0.148.2") // Use the latest version
+    implementation(project(":distributions:ndi-library", configuration = "windows-x86_64"))
 
     // You MUST include the runtime for the target operating system/architecture.
     // For local development on a 64-bit Windows/Linux/Mac machine:

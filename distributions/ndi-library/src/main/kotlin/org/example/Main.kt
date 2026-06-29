@@ -83,4 +83,8 @@ fun findLibrary(ndiRuntimePath: File, target: String): File {
     return result[0]
 }
 
-data class NdiInfo(val platform: String, val version: String, val date: String, val libraryPath: File)
+data class NdiInfo(val platform: String, val version: String, val date: String, val libraryPath: File) {
+    override fun toString(): String {
+        return "$platform $date $version"
+    }
+}

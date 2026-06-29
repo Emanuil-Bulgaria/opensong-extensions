@@ -31,7 +31,7 @@ class NdiLibrary (
     }
 
     init {
-        val path = Path.of("C:\\Program Files\\NDI\\NDI 6 Runtime\\v6\\Processing.NDI.Lib.x64.dll")
+        val path = NDILibraryLoader.getForCurrentNDIPlatform().linkedLibrary.path
         lookup = SymbolLookup.libraryLookup(path, arena)
         initFuncHandle = getMethodHandle("NDIlib_initialize",
             FunctionDescriptor.of(ValueLayout.JAVA_BOOLEAN))

@@ -6,9 +6,8 @@ dependencies {
     testImplementation(kotlin("test"))
 
     implementation("org.jetbrains.skiko:skiko-awt:0.148.2") // Use the latest version
-    implementation("bg.emanuil:ndi-library:6.3.2.0:windows-x86_64")
-    implementation("bg.emanuil:ndi-provider:1.0-SNAPSHOT")
-//    implementation(project(":distributions:ndi-library", configuration = "windows-x86_64"))
+    implementation("bg.emanuil:ndi-runtime-linux-x86_64:6.3.2.0")
+    implementation(project(":modules:ndi-provider"))
     implementation("com.fasterxml.woodstox:woodstox-core:7.2.1")
 
     // You MUST include the runtime for the target operating system/architecture.

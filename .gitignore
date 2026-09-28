@@ -44,6 +44,9 @@ bin/
 ### Mac OS ###
 .DS_Store
 
+secrets.env
 .env
 result
 .idea/
+
+.direnv

@@ -11,6 +11,9 @@ project(":modules:ndi-provider").projectDir = File("modules/ndi-provider")
 include("distributions:ndi-library")
 project(":distributions:ndi-library").projectDir = File("distributions/ndi-library")
 
+include("distributions:ndi-runtime-linux")
+project(":distributions:ndi-runtime-linux").projectDir = File("distributions/ndi-runtime-linux")
+
 
 pluginManagement {
     repositories {

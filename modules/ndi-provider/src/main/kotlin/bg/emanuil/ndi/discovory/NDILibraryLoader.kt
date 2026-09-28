@@ -23,6 +23,9 @@ object NDILibraryLoader {
         if(os.contains("Windows") && arch == "amd64") {
             return NDIPlatform.WINDOWS_X86_64
         }
+        if(os.contains("Linux") && arch == "amd64") {
+            return NDIPlatform.LINUX_X86_64
+        }
 
         else throw IllegalStateException("Unknown platform ($os, $arch) is not supported")
     }

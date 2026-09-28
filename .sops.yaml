@@ -1,0 +1,8 @@
+keys:
+  - &nprodanov age1zpwfwk3g7u73cy3769hmteyhsn4ahdzyz6pnw29apsnaahz7je3qxzd6gm
+
+creation_rules:
+  - path_regex: \.env$
+    age: age1zpwfwk3g7u73cy3769hmteyhsn4ahdzyz6pnw29apsnaahz7je3qxzd6gm
+
+

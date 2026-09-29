@@ -46,6 +46,7 @@ bin/
 
 secrets.env
 .env
+.env.secrets
 result
 .idea/
 

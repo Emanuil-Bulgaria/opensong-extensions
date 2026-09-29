@@ -1,0 +1,18 @@
+[tools]
+age = "latest"
+java = "25"
+sops = "latest"
+
+[env]
+_.file = ".env.secrets"
+
+[tasks.generate-env]
+description = "Generates the .env file with the encryted secrets from secrets.enc.env"
+run = [
+    "sops --decrypt --output-type dotenv secrets.enc.env > .env.secrets",
+    "mise env --dotenv > .env",
+    "del .env.secrets"
+]
+
+[hooks]
+enter = { task = "generate-env" }

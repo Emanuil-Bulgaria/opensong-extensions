@@ -11,39 +11,18 @@ kotlin {
 }
 
 configurations.register("windows-x86_64").extendsFrom(configurations.api)
-configurations.register("linux-x86_64").extendsFrom(configurations.api)
 
-tasks.register<JavaExec>("getVersion") {
-    group = "application"
-    dependsOn(tasks.named("classes"))
-
-    classpath = sourceSets.named("main").get().runtimeClasspath
-
-    mainClass.set("bg.emanuil.ndi.discovory.MainKt")
-
-    args("C:\\Program Files\\NDI\\NDI 6 Runtime\\v6")
-}
-
-tasks.register<JavaExec>("getVersionLinux") {
-    group = "application"
-    dependsOn(tasks.named("classes"))
-
-    classpath = sourceSets.named("main").get().runtimeClasspath
-
-    mainClass.set("bg.emanuil.ndi.discovory.GenLinuxMainKt")
-
-    args("build/lib/libndi.so")
-}
-
-val jarTasks = file("ndi-info").listFiles().map {
+val jarTask = file("ndi-info.properties").let { file ->
     val props = Properties()
-    it.inputStream().use { props.load(it) }
+    file.inputStream().use { props.load(it) }
+    props
+}.let { props ->
     val packageName = "bg.emanuil.ndi.discovory"
-    val classifier = it.name.replace(".properties", "")
     val generatedClassName =
         "NDIProvider${props["platform"]}V${props["version"].toString().replace(".", "D")}"
+    val classifier = "windows-x86_64"
 
-    val generateClass = tasks.register("generateClassFile-${classifier}") {
+    val generateClass = tasks.register("generateClassFile") {
         val outputDir = layout.buildDirectory.dir("generated/source/libraryProvider/main")
         outputs.dir(outputDir)
 
@@ -54,7 +33,7 @@ val jarTasks = file("ndi-info").listFiles().map {
             // Generate the Kotlin class code matching your abstract constructor
             val code = """
             package $packageName
-            
+
             import bg.emanuil.ndi.discovory.NdiProvider
 
             class $generatedClassName : NdiProvider(
@@ -69,7 +48,7 @@ val jarTasks = file("ndi-info").listFiles().map {
         }
     }
     val directory = layout.buildDirectory.dir("generated/resources/main")
-    val generateSPI = tasks.register("generateSPI-${classifier}") {
+    val generateSPI = tasks.register("generateSPI") {
         val file = directory.map { File(it.asFile,
             "META-INF/services/bg.emanuil.ndi.discovory.NDILinkedLibrary") }
         outputs.file(file)
@@ -86,8 +65,7 @@ val jarTasks = file("ndi-info").listFiles().map {
 
     tasks.processResources { dependsOn(generateSPI) }
 
-    var jarTask = tasks.register<Jar>("jar-${classifier}") {
-        //archiveClassifier.set(classifier)
+    var jarTask = tasks.register<Jar>("ndiJar") {
         group = "build"
         version = props["version"].toString()
         from(props["path"])
@@ -95,7 +73,7 @@ val jarTasks = file("ndi-info").listFiles().map {
         dependsOn(tasks.processResources)
         from(layout.buildDirectory.dir("classes/kotlin/main"))
         from(layout.buildDirectory.dir("resources/main"))
-        from(it)
+        from(file("ndi-info.properties"))
         from(directory)
 
         manifest {
@@ -108,18 +86,7 @@ val jarTasks = file("ndi-info").listFiles().map {
 
     project.artifacts.add(classifier, jarTask)
 
-    return@map jarTask
-}
-
-kotlin {
-    sourceSets.main {
-        kotlin.srcDir("build/generated/source/libraryProvider/main")
-    }
-}
-
-
-dependencies {
-    api(project(":modules:ndi-provider"))
+    jarTask
 }
 
 publishing {
@@ -135,14 +102,19 @@ publishing {
     }
     publications {
         create<MavenPublication>("ndi-library") {
-            jarTasks.forEach { task -> artifact(task) }
-            artifactId = "ndi-runtime-linux-x86_64"
+            artifactId = "ndi-runtime-windows-x86_64"
+            artifact(jarTask)
         }
     }
 }
 
+dependencies {
+    api(project(":modules:ndi-provider"))
+}
+
+
 tasks.jar { enabled = false }
 
 tasks.build {
-    jarTasks.forEach { task -> dependsOn(task) }
+    dependsOn(jarTask)
 }

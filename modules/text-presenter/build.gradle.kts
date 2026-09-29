@@ -7,6 +7,7 @@ dependencies {
 
     implementation("org.jetbrains.skiko:skiko-awt:0.148.2") // Use the latest version
     implementation("bg.emanuil:ndi-runtime-linux-x86_64:6.3.2.0")
+    implementation("bg.emanuil:ndi-runtime-windows-x86_64:6.3.2.0")
     implementation(project(":modules:ndi-provider"))
     implementation("com.fasterxml.woodstox:woodstox-core:7.2.1")
 

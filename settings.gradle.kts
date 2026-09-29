@@ -8,11 +8,11 @@ project(":modules:text-presenter").projectDir = File("modules/text-presenter")
 include("modules:ndi-provider")
 project(":modules:ndi-provider").projectDir = File("modules/ndi-provider")
 
-include("distributions:ndi-library")
-project(":distributions:ndi-library").projectDir = File("distributions/ndi-library")
-
 include("distributions:ndi-runtime-linux")
 project(":distributions:ndi-runtime-linux").projectDir = File("distributions/ndi-runtime-linux")
+
+include("distributions:ndi-runtime-windows")
+project(":distributions:ndi-runtime-windows").projectDir = File("distributions/ndi-runtime-windows")
 
 
 pluginManagement {

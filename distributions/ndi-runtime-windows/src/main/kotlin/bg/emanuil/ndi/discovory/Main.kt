@@ -29,12 +29,7 @@ fun main(args: Array<String>) {
 }
 
 fun writeProperties(info: NdiInfo) {
-    val name = when (info.platform) {
-        "WIN64" -> "windows-x86_64.properties"
-        "LINUX" -> "linux-x86_64.properties"
-        else -> throw IllegalArgumentException("Unsupported platform: ${info.platform}")
-    }
-    val path = Path.of("./ndi-info/$name")
+    val path = Path.of("./ndi-info.properties")
     path.parent.toFile().mkdirs()
     val props = Properties()
     props.setProperty("platform", info.platform)

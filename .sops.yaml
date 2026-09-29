@@ -1,8 +1,13 @@
 keys:
   - &nprodanov age1zpwfwk3g7u73cy3769hmteyhsn4ahdzyz6pnw29apsnaahz7je3qxzd6gm
+  - &presenter-pc age1sp223z0ccg05gf704nssdmnrag7459qq0ez947lsn0gdsxd8p3xssud7ur
 
 creation_rules:
   - path_regex: \.env$
-    age: age1zpwfwk3g7u73cy3769hmteyhsn4ahdzyz6pnw29apsnaahz7je3qxzd6gm
+    key_groups:
+      - age:
+        - *nprodanov
+        - *presenter-pc
+
 
 

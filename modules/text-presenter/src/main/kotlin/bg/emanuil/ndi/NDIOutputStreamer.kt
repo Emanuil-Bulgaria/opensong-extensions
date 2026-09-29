@@ -6,7 +6,14 @@ import bg.emanuil.ndi.impl.NDISendCreate
 import bg.emanuil.ndi.impl.NDISendInstance
 import bg.emanuil.ndi.impl.NDIVideoFrameV2
 import bg.emanuil.ndi.impl.NdiLibrary
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.foreign.Arena
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class NDIOutputStreamer(
@@ -19,7 +26,7 @@ class NDIOutputStreamer(
     val frameFormatType: NDIFrameFormatType = NDIFrameFormatType.PROGRESSIVE,
     private val initialArena: Arena? = null,
 
-) : Runnable, AutoCloseable {
+) : AutoCloseable {
 
     private lateinit var arena: Arena
     private var closeArena = false
@@ -32,6 +39,12 @@ class NDIOutputStreamer(
     private lateinit var frameInfo: NDIOutputFrame
 
     private var streams: MutableList<NDIOutputStreamState> = mutableListOf()
+
+    private val ndiDispatcher = Executors.newSingleThreadExecutor { runnable ->
+        Thread(runnable,
+            "NDI-Worker-${name.replace(" ", "-")}")
+            .apply { priority = Thread.MAX_PRIORITY }
+    }.asCoroutineDispatcher()
 
     fun add(stream: NDIOutputStream) {
         streams.add(NDIOutputStreamState(stream))
@@ -76,7 +89,7 @@ class NDIOutputStreamer(
         }
     }
 
-    override fun run() {
+    private fun loop() {
         try {
             initialize()
             val frameDuration = 1_000_000_000.0 / frameRate.frameRate()
@@ -105,15 +118,19 @@ class NDIOutputStreamer(
 
                 if((System.nanoTime() - startTime) > 1_000_000_000) {
                     startTime = System.nanoTime()
-                    println(frames)
+//                    println(frames)
                     frames = 0
                 }
 
             }
-        } catch (e: InterruptedException) {
-            println("Interrupted")
         } finally {
             destroy()
+        }
+    }
+
+    fun start(): Job {
+        return CoroutineScope(ndiDispatcher).launch {
+            loop()
         }
     }
 

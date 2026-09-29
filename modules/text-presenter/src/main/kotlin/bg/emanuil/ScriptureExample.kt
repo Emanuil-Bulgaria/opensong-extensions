@@ -16,7 +16,7 @@ import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.atomic.AtomicReference
 
-class LowerThirdsExample(
+class ScriptureExample(
     textProviders: List<TextProvider>,
 ) : SkiaNDIStreamer() {
 
@@ -39,15 +39,31 @@ class LowerThirdsExample(
         super.initialize(frame, startTime)
     }
 
+    val rect = RRect.makeXYWH(
+        l = 10f,
+        t = 10f,
+        w = width - 10f,
+        h = height - 10f,
+        radius = 20f)
+
+    val whitePaint = Paint().apply {
+        color = Color.WHITE
+        mode = PaintMode.FILL
+        isAntiAlias = true
+    }
+
     override fun render(canvas: Canvas, frameTime: Long) {
         canvas.clear(Color.makeARGB(0x00, 0xAD, 0x00, 0x00))
 
+
+
+        canvas.drawRRect(rect, whitePaint)
         texts.value["OpenSongSlideBody"]?.let { text ->
-            TextMulti(canvas, text)
+            TextMulti(canvas, text, textColor = Color.BLACK)
         }
     }
 
-    fun TextMulti(canvas: Canvas, text: String) {
+    fun TextMulti(canvas: Canvas, text: String, textColor: Int = Color.WHITE) {
         val fontCollection = FontCollection().apply {
             setDefaultFontManager(FontMgr.default)
         }
@@ -59,7 +75,7 @@ class LowerThirdsExample(
         var paragraph: Paragraph? = null
         for(size in listOf(72f, 64f, 36f, 18f)) {
             val textStyle = TextStyle().apply {
-                color = Color.WHITE
+                color = textColor
                 fontSize = size
             }
 

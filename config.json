@@ -1,0 +1,15 @@
+{
+  "NDI": [
+    {
+      "name": "SongLowerThirds",
+      "template": "LowerThirdsExample"
+    },
+    {
+      "name": "Scripture",
+      "template": "ScriptureExample"
+    }
+  ],
+  "OpenSong": {
+    "DocumentsDirectory": "C:\\Users\\Presenter\\Documents\\OpenSong tutorial"
+  }
+}

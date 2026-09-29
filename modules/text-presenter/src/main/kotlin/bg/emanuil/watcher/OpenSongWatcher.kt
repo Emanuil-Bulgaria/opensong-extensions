@@ -1,12 +1,14 @@
 package bg.emanuil.watcher
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import javax.xml.stream.XMLInputFactory
 import javax.xml.stream.XMLStreamReader
 
 class OpenSongWatcher(
     private val documents: File,
-                      private val notify: (SlideData) -> Unit) : Runnable {
+                      private val notify: (SlideData) -> Unit) {
     val file: File by lazy {
         val f = File(documents, "VMixOpenSong.xml")
         if(!f.exists()) throw IllegalStateException("VMixOpenSong.xml does not exists")
@@ -15,7 +17,7 @@ class OpenSongWatcher(
 
     val factory: XMLInputFactory by lazy { XMLInputFactory.newInstance() }
 
-    override fun run() {
+    suspend fun run() = withContext(Dispatchers.IO) {
         read()
         FileWatcher(file) { read() }.run()
     }

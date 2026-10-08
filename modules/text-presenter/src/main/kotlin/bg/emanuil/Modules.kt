@@ -1,8 +1,10 @@
 package bg.emanuil
 
+import bg.emanuil.draw.ComposeNDIStreamer
 import bg.emanuil.draw.OpenSongTextProvider
 import bg.emanuil.draw.SkiaNDIStreamer
 import bg.emanuil.draw.TextProvider
+import bg.emanuil.ndi.NDIOutputStream
 import bg.emanuil.ndi.NDIStreamManager
 import bg.emanuil.watcher.ConfigurationStore
 import org.koin.dsl.bind
@@ -16,7 +18,8 @@ val modules = module {
     single {
         mapOf(
             LowerThirdsExample::class.simpleName!! to LowerThirdsExample(getAll()),
-            ScriptureExample::class.simpleName!! to ScriptureExample(getAll())
+            ScriptureExample::class.simpleName!! to ScriptureExample(getAll()),
+            "ComposeExample" to ComposeNDIStreamer({ ComposeExample() })
         )
     }
 

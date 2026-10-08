@@ -1,12 +1,8 @@
 {
   "NDI": [
     {
-      "name": "SongLowerThirds",
-      "template": "LowerThirdsExample"
-    },
-    {
-      "name": "Scripture",
-      "template": "ScriptureExample"
+      "name": "ComposeExample",
+      "template": "ComposeExample"
     }
   ],
   "OpenSong": {

@@ -12,7 +12,7 @@ import java.lang.foreign.Arena
 
 class NDIStreamManager(
     private val configStore: ConfigurationStore,
-    private val templates: Map<String, SkiaNDIStreamer>
+    private val templates: Map<String, NDIOutputStream>
 ) {
     private val logger = KotlinLogging.logger {}
 

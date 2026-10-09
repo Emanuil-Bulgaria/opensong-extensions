@@ -1,7 +1,12 @@
 package bg.emanuil.draw
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ImageComposeScene
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import bg.emanuil.ndi.NDIOutputFrame
 import bg.emanuil.ndi.NDIOutputStream
 import org.jetbrains.skia.*
@@ -18,13 +23,21 @@ open class ComposeNDIStreamer(private val content: @Composable () -> Unit) : NDI
     private lateinit var imageInfo: ImageInfo
     private var rowBytes: Int = 0
 
+    private val storeOwner = object: ViewModelStoreOwner {
+        override val viewModelStore = ViewModelStore()
+    }
+
 
     override fun initialize(frame: NDIOutputFrame, startTime: Long) {
         super.initialize(frame, startTime)
         scene = ImageComposeScene(
             width = frame.dimensions.width,
             height = frame.dimensions.height,
-            content = content
+            content = {
+                CompositionLocalProvider(LocalViewModelStoreOwner provides storeOwner) {
+                    content()
+                }
+            }
         )
         imageInfo = ImageInfo(
             colorInfo,

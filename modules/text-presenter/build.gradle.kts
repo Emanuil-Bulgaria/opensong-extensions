@@ -12,6 +12,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
 
     implementation(compose.desktop.currentOs)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.lifecycle.viewmodel.compose)
+
 
 //    implementation("org.jetbrains.skiko:skiko-awt:0.148.2") // Use the latest version
     implementation("bg.emanuil:ndi-runtime-linux-x86_64:6.3.2.0")

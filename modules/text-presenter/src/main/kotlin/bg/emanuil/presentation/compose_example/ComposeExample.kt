@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.presentation.compose_example
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,15 +7,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ComposeExample() {
+fun ComposeExample(
+    viewModel: ComposeExampleViewModel = koinViewModel()
+) {
+    val state = viewModel.state.collectAsState()
     Box(
         modifier = Modifier.fillMaxSize().padding(64.dp),
         contentAlignment = Alignment.Center) {
@@ -26,7 +31,7 @@ fun ComposeExample() {
                 .clip(RoundedCornerShape(14))
                 .background(Color.Red)) {
             Text(
-                text = "Hello Compose!",
+                text = state.value,
                 fontSize = 96.sp,
                 color = Color.White)
         }

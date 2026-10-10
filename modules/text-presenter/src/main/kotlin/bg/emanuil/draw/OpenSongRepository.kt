@@ -55,7 +55,9 @@ class OpenSongRepository(
 
             OpenSongWatcher(file) { slideData ->
                 _title.update { slideData.title }
-                _body.update { slideData.body }
+                _body.update {
+                    slideData.body }
+                logger.info { "Update $slideData" }
             }.run()
         }
     }

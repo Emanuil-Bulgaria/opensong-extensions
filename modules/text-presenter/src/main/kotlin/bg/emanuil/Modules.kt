@@ -8,6 +8,7 @@ import bg.emanuil.ndi.NDIStreamManager
 import bg.emanuil.presentation.compose_example.ComposeExample
 import bg.emanuil.presentation.compose_example.ComposeExampleViewModel
 import bg.emanuil.presentation.compose_example.LowerThirdsSong
+import bg.emanuil.presentation.compose_example.LowerThirdsSongViewModel
 import bg.emanuil.watcher.ConfigurationStore
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -19,9 +20,12 @@ val modules = module {
         ConfigurationStore()
     }
 
-    singleOf(::OpenSongRepository)
+    single {
+        OpenSongRepository(get()).apply { start() }
+    }
 
     viewModelOf(::ComposeExampleViewModel)
+    viewModelOf(::LowerThirdsSongViewModel)
 
     single {
         mapOf(
@@ -33,7 +37,7 @@ val modules = module {
 
     single {
         OpenSongTextProvider(get(ConfigurationStore::class))
-            .apply { start() }
+            .apply { start() }.apply { start() }
     }.bind(TextProvider::class)
 
     single {

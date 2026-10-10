@@ -13,8 +13,12 @@ dependencies {
 
     implementation(compose.desktop.currentOs)
     implementation(libs.koin.compose.viewmodel)
+    implementation(libs.koin.compose)
     implementation(libs.lifecycle.viewmodel.compose)
 
+    implementation("io.github.pdvrieze.xmlutil:serialization:1.0.2")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.0.2")
 
 //    implementation("org.jetbrains.skiko:skiko-awt:0.148.2") // Use the latest version
     implementation("bg.emanuil:ndi-runtime-linux-x86_64:6.3.2.0")

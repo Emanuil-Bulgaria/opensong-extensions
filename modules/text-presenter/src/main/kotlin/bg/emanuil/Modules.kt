@@ -7,6 +7,8 @@ import bg.emanuil.draw.TextProvider
 import bg.emanuil.ndi.NDIStreamManager
 import bg.emanuil.presentation.compose_example.ComposeExample
 import bg.emanuil.presentation.compose_example.ComposeExampleViewModel
+import bg.emanuil.presentation.compose_example.LowerThirdsScripture
+import bg.emanuil.presentation.compose_example.LowerThirdsScriptureViewModel
 import bg.emanuil.presentation.compose_example.LowerThirdsSong
 import bg.emanuil.presentation.compose_example.LowerThirdsSongViewModel
 import bg.emanuil.watcher.ConfigurationStore
@@ -26,12 +28,14 @@ val modules = module {
 
     viewModelOf(::ComposeExampleViewModel)
     viewModelOf(::LowerThirdsSongViewModel)
+    viewModelOf(::LowerThirdsScriptureViewModel)
 
     single {
         mapOf(
             LowerThirdsExample::class.simpleName!! to LowerThirdsExample(getAll()),
             ScriptureExample::class.simpleName!! to ScriptureExample(getAll()),
-            "ComposeExample" to ComposeNDIStreamer({ LowerThirdsSong() })
+            "ComposeExample" to ComposeNDIStreamer({ LowerThirdsSong() }),
+            "LowerThirdsScripture" to ComposeNDIStreamer({ LowerThirdsScripture() })
         )
     }
 

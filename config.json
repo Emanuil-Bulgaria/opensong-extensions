@@ -3,6 +3,10 @@
     {
       "name": "ComposeExample",
       "template": "ComposeExample"
+    },
+    {
+      "name": "LowerThirdsScripture",
+      "template": "LowerThirdsScripture"
     }
   ],
   "OpenSong": {

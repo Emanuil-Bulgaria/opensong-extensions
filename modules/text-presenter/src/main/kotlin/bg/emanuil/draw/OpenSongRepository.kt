@@ -1,5 +1,6 @@
 package bg.emanuil.draw
 
+import bg.emanuil.opensong.OpenSongVerseSearcher
 import bg.emanuil.watcher.ConfigurationStore
 import bg.emanuil.watcher.OpenSongWatcher
 import bg.emanuil.watcher.config.OpenSongConfig
@@ -7,7 +8,6 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
@@ -29,6 +29,7 @@ class OpenSongRepository(
     val body = _body.asStateFlow()
 
     private var job: Job? = null
+    private var getVerse: OpenSongVerseSearcher? = null
 
     fun start() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -53,6 +54,8 @@ class OpenSongRepository(
                 return@launch
             }
 
+            getVerse = OpenSongVerseSearcher(file)
+
             OpenSongWatcher(file) { slideData ->
                 _title.update { slideData.title }
                 _body.update {
@@ -61,4 +64,7 @@ class OpenSongRepository(
             }.run()
         }
     }
+
+    fun getVerse(term: String)
+        = getVerse?.let { it(term) }
 }

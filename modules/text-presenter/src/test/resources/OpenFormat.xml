@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLBIBLE xmlns:p1="http://www.w3.org/2001/XMLSchema-instance" version="2.0.1.22" p1:noNamespaceSchemaLocation="zef2005.xsd" biblename="Българска Библия, Ревизирано издание 1940" type="x-bible" status="v" revision="0">
+    <INFORMATION>
+        <title>Българска Библия, Ревизирано издание 1940</title>
+        <creator>Българска Библия, Ревизирано издание 1940</creator>
+        <subject/>
+        <description>Българска Библия, Ревизирано издание 1940</description>
+        <publisher/>
+        <contributors/>
+        <date/>
+        <type/>
+        <format>Zefania XML Bible Markup Language</format>
+        <identifier>BG1940</identifier>
+        <language>bg</language>
+        <rights>Copyright © 1995-2008, Text Revision © Bibliata.com, Computer typesetting © Bibles.org.uk</rights>
+    </INFORMATION>
+    <BIBLEBOOK bnumber="1" bname="Битие" bsname="Бит">
+        <CHAPTER cnumber="1">
+            <VERS vnumber="1">В начало Бог създаде небето и земята.</VERS>
+            <VERS vnumber="2">А земята беше пуста и неустроена; и тъмнина покриваше бездната; и Божият Дух се носеше над водата.</VERS>
+            <VERS vnumber="3">И Бог каза: Да бъде светлина. И стана светлина.</VERS>
+        </CHAPTER>
+        <CHAPTER cnumber="2">
+            <VERS vnumber="1">Така се свършиха небето и земята и цялото тяхно войнство.</VERS>
+            <VERS vnumber="2">И на седмия ден, като свърши Бог делата, които беше създал, на седмия ден си почина от всичките дела, които беше създал.</VERS>
+            <VERS vnumber="3">И благослови Бог седмия ден и го освети, защото в него си почина от всичките си дела,  от всичко , което Бог беше създал и сътворил.</VERS>
+        </CHAPTER>
+    </BIBLEBOOK>
+    <BIBLEBOOK bnumber="43" bname="Йоан" bsname="Йоан">
+        <CHAPTER cnumber="1">
+            <VERS vnumber="1">В началото бе Словото; и Словото беше у Бога; и Словото бе Бог.</VERS>
+            <VERS vnumber="2">То в начало беше у Бога.</VERS>
+            <VERS vnumber="3">Всичко това чрез Него стана; и без Него не е ставало нищо  от това , което е станало.</VERS>
+        </CHAPTER>
+        <CHAPTER cnumber="2">
+            <VERS vnumber="1">На третия ден имаше сватба в Кана галилейска и Исусовата майка беше там.</VERS>
+            <VERS vnumber="2">И Исус и учениците Му бяха поканени на сватбата.</VERS>
+            <VERS vnumber="3">И когато се свърши виното, майката на Исуса Му казва: Вино нямат.</VERS>
+            <VERS vnumber="4">А Исус й казва:  Какво има между Мене и тебе жено? часът Ми още не е дошъл.</VERS>
+        </CHAPTER>
+    </BIBLEBOOK>
+</XMLBIBLE>

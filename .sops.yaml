@@ -1,5 +1,6 @@
 keys:
   - &nprodanov age1zpwfwk3g7u73cy3769hmteyhsn4ahdzyz6pnw29apsnaahz7je3qxzd6gm
+  - &stream-pc age1x2mpwjz9nzgkenn8wg3k2vl7v57utlt6rrydyev7xfdzwltagpgquuje06
   - &presenter-pc age1sp223z0ccg05gf704nssdmnrag7459qq0ez947lsn0gdsxd8p3xssud7ur
 
 creation_rules:
@@ -7,7 +8,6 @@ creation_rules:
     key_groups:
       - age:
         - *nprodanov
+        - *stream-pc
         - *presenter-pc
-
-
 

@@ -61,6 +61,7 @@ class LowerThirdsExample(
             val textStyle = TextStyle().apply {
                 color = Color.WHITE
                 fontSize = size
+
             }
 
             paragraph = ParagraphBuilder(paragraphStyle, fontCollection).apply {

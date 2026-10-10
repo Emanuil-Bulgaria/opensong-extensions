@@ -7,6 +7,7 @@ import bg.emanuil.draw.TextProvider
 import bg.emanuil.ndi.NDIStreamManager
 import bg.emanuil.presentation.compose_example.ComposeExample
 import bg.emanuil.presentation.compose_example.ComposeExampleViewModel
+import bg.emanuil.presentation.compose_example.LowerThirdsSong
 import bg.emanuil.watcher.ConfigurationStore
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -26,7 +27,7 @@ val modules = module {
         mapOf(
             LowerThirdsExample::class.simpleName!! to LowerThirdsExample(getAll()),
             ScriptureExample::class.simpleName!! to ScriptureExample(getAll()),
-            "ComposeExample" to ComposeNDIStreamer({ ComposeExample() })
+            "ComposeExample" to ComposeNDIStreamer({ LowerThirdsSong() })
         )
     }
 

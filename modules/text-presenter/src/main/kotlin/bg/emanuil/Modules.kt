@@ -34,7 +34,7 @@ val modules = module {
         mapOf(
             LowerThirdsExample::class.simpleName!! to LowerThirdsExample(getAll()),
             ScriptureExample::class.simpleName!! to ScriptureExample(getAll()),
-            "ComposeExample" to ComposeNDIStreamer({ LowerThirdsSong() }),
+            "LowerThirdsSong" to ComposeNDIStreamer({ LowerThirdsSong() }),
             "LowerThirdsScripture" to ComposeNDIStreamer({ LowerThirdsScripture() })
         )
     }

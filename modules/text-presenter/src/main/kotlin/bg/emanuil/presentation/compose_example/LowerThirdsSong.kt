@@ -32,7 +32,7 @@ fun LowerThirdsSong(
         text?.let { text ->
             val textSize = TextAutoSize.StepBased(
                 minFontSize = 36.sp,
-                maxFontSize = 96.sp,
+                maxFontSize = 76.sp,
                 stepSize = 1.sp
             )
             BasicText(

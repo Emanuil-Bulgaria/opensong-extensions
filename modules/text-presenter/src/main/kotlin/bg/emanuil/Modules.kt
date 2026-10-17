@@ -5,17 +5,28 @@ import bg.emanuil.draw.OpenSongRepository
 import bg.emanuil.draw.OpenSongTextProvider
 import bg.emanuil.draw.TextProvider
 import bg.emanuil.ndi.NDIStreamManager
-import bg.emanuil.presentation.compose_example.ComposeExample
-import bg.emanuil.presentation.compose_example.ComposeExampleViewModel
-import bg.emanuil.presentation.compose_example.LowerThirdsScripture
-import bg.emanuil.presentation.compose_example.LowerThirdsScriptureViewModel
-import bg.emanuil.presentation.compose_example.LowerThirdsSong
-import bg.emanuil.presentation.compose_example.LowerThirdsSongViewModel
+import bg.emanuil.presentation.compose_example.*
 import bg.emanuil.watcher.ConfigurationStore
-import org.koin.core.module.dsl.singleOf
+import org.koin.core.definition.KoinDefinition
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.parameter.ParametersHolder
+import org.koin.core.scope.Scope
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import org.koin.dsl.onClose
+
+inline fun <reified T : Service> Module.service(
+    noinline definition: Scope.(ParametersHolder) -> T
+) : KoinDefinition<T> {
+    return single {
+        val service = definition(it)
+        service.start()
+        service
+    } onClose { instance ->
+        instance?.stop()
+    }
+}
 
 val modules = module {
     single {

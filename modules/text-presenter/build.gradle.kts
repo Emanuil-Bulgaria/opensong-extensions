@@ -1,3 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
     kotlin("jvm") version "2.3.21"
     kotlin("plugin.serialization") version "2.4.20"
@@ -44,6 +46,20 @@ dependencies {
 
 kotlin {
     jvmToolchain(25)
+}
+
+compose.desktop {
+    application {
+
+        mainClass = "bg.emanuil.MainKt"
+        nativeDistributions {
+            targetFormats(TargetFormat.AppImage)
+            packageName = "MyDesktopApp"
+            packageVersion = "1.0.0"
+
+            includeAllModules = true
+        }
+    }
 }
 
 tasks.test {

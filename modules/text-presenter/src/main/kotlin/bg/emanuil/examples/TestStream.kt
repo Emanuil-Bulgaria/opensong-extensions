@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.examples
 
 import bg.emanuil.ndi.NDIOutputFrame
 import bg.emanuil.ndi.NDIOutputStream

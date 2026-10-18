@@ -1,4 +1,4 @@
-package bg.emanuil.presentation.compose_example
+package bg.emanuil.presentation.lower_thirds_scripture
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

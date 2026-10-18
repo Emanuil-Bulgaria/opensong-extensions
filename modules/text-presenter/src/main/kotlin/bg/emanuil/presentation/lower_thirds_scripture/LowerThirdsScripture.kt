@@ -1,9 +1,6 @@
-package bg.emanuil.presentation.compose_example
+package bg.emanuil.presentation.lower_thirds_scripture
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.indication
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,12 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeJoin
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.koin.compose.viewmodel.koinViewModel
@@ -39,9 +33,14 @@ fun LowerThirdsScripture(
 
     val title by viewModel.title.collectAsState()
     val body by viewModel.body.collectAsState()
+    LowerThirdsScriptureInternal(title, body)
+}
+
+@Composable
+fun LowerThirdsScriptureInternal(title: String?, body: String?) {
     val textSize = TextAutoSize.StepBased(
         minFontSize = 25.sp,
-        maxFontSize = 56.sp,
+        maxFontSize = 46.sp,
         stepSize = 1.sp
     )
 
@@ -63,7 +62,7 @@ fun LowerThirdsScripture(
                         style = TextStyle(
                             color = Color(0xFFD99050),
                             fontWeight = FontWeight.Bold,
-                            fontSize = 36.sp,
+                            fontSize = 26.sp,
                             fontFamily = FontFamily.Serif
                         )
                     )

@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.config
 
 interface Service {
 

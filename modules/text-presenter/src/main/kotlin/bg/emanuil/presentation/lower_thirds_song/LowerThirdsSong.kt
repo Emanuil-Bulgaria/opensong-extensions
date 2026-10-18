@@ -1,4 +1,4 @@
-package bg.emanuil.presentation.compose_example
+package bg.emanuil.presentation.lower_thirds_song
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

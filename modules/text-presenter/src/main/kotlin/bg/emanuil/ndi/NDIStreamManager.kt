@@ -1,22 +1,36 @@
 package bg.emanuil.ndi
 
-import bg.emanuil.LowerThirdsExample
-import bg.emanuil.draw.SkiaNDIStreamer
+import bg.emanuil.config.Service
 import bg.emanuil.ndi.impl.NdiLibrary
 import bg.emanuil.watcher.ConfigurationStore
 import bg.emanuil.watcher.config.NDIStreamConfig
 import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import java.lang.foreign.Arena
 
 class NDIStreamManager(
     private val configStore: ConfigurationStore,
     private val templates: Map<String, NDIOutputStream>
-) {
+): Service {
     private val logger = KotlinLogging.logger {}
 
     private var jobs: MutableMap<String, NDIStreamJob> = mutableMapOf()
+
+    private var serviceJob: Job? = null
+
+    override fun start() {
+        serviceJob = CoroutineScope(Dispatchers.IO)
+            .launch { run() }
+    }
+
+    override fun stop() {
+        jobs.values.forEach(NDIStreamJob::cancel)
+        serviceJob?.cancel()
+    }
 
     suspend fun run() {
         Arena.ofShared().use { arena ->

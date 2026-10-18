@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.koin.compose.viewmodel)
     implementation(libs.koin.compose)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.bundles.material.icons)
 
     implementation("io.github.pdvrieze.xmlutil:serialization:1.0.2")
 

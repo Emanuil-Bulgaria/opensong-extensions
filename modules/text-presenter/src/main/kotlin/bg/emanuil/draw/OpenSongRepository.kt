@@ -1,5 +1,6 @@
 package bg.emanuil.draw
 
+import bg.emanuil.config.Service
 import bg.emanuil.opensong.OpenSongVerseSearcher
 import bg.emanuil.watcher.ConfigurationStore
 import bg.emanuil.watcher.OpenSongWatcher
@@ -17,7 +18,7 @@ import java.io.File
 
 class OpenSongRepository(
     private val configStore: ConfigurationStore
-) {
+): Service {
 
     private val logger = KotlinLogging.logger {}
 
@@ -30,9 +31,12 @@ class OpenSongRepository(
 
     private var job: Job? = null
     private var getVerse: OpenSongVerseSearcher? = null
+    private var serviceJob: Job? = null
 
-    fun start() {
-        CoroutineScope(Dispatchers.IO).launch {
+    private val scope = CoroutineScope(Dispatchers.IO)
+
+    override fun start() {
+        serviceJob = scope.launch {
             configStore.state
                 .map { it.openSongConfig }
                 .collect { config ->
@@ -43,7 +47,7 @@ class OpenSongRepository(
 
     fun watchFile(config: OpenSongConfig?) {
         job?.cancel()
-        job = CoroutineScope(Dispatchers.IO).launch {
+        job = scope.launch {
             val file = config?.documentsPath?.run { File(this) }
             if(file == null) {
                 logger.error { "OpenSong data directory is not set!" }
@@ -63,6 +67,11 @@ class OpenSongRepository(
                 logger.info { "Update $slideData" }
             }.run()
         }
+    }
+
+    override fun stop() {
+        job?.cancel()
+        serviceJob?.cancel()
     }
 
     fun getVerse(term: String)

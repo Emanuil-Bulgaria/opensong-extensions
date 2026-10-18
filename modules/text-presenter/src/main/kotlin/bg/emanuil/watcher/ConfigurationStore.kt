@@ -1,6 +1,7 @@
 package bg.emanuil.watcher
 
 import bg.emanuil.watcher.config.Configuration
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,6 +16,8 @@ import kotlin.time.Duration.Companion.seconds
 
 class ConfigurationStore(configPath: File = Path.of("config.json").toFile()) {
 
+    private val logger = KotlinLogging.logger {}
+
     val state: StateFlow<Configuration> = fileWatcher(configPath)
         .map { readFile(it) }
         .stateIn(
@@ -28,6 +31,10 @@ class ConfigurationStore(configPath: File = Path.of("config.json").toFile()) {
 
     private suspend fun readFile(file: File): Configuration {
         delay(1.seconds)
+        if(!file.exists()) {
+            logger.error { "File ${file.absolutePath} does not exist." }
+            return Configuration()
+        }
         val raw = file.readText()
         return json.decodeFromString(raw)
     }

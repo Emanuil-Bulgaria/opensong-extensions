@@ -1,5 +1,6 @@
 package bg.emanuil.draw
 
+import bg.emanuil.config.Service
 import bg.emanuil.watcher.ConfigurationStore
 import bg.emanuil.watcher.OpenSongWatcher
 import bg.emanuil.watcher.config.OpenSongConfig
@@ -17,7 +18,7 @@ import java.io.File
 
 class OpenSongTextProvider(
     private val configStore: ConfigurationStore
-): TextProvider {
+): TextProvider, Service {
 
     private val logger = KotlinLogging.logger {}
 
@@ -30,8 +31,12 @@ class OpenSongTextProvider(
 
     private var job: Job? = null
 
-    fun start() {
-        CoroutineScope(Dispatchers.IO).launch {
+    private var serviceJob: Job? = null
+
+    private val scope = CoroutineScope(Dispatchers.IO)
+
+    override fun start() {
+        serviceJob = CoroutineScope(Dispatchers.IO).launch {
             configStore.state
                 .map { it.openSongConfig }
                 .collect { config ->
@@ -42,7 +47,7 @@ class OpenSongTextProvider(
 
     fun watchFile(config: OpenSongConfig?) {
         job?.cancel()
-        job = CoroutineScope(Dispatchers.IO).launch {
+        job = scope.launch {
             val file = config?.documentsPath?.run { File(this) }
             if(file == null) {
                 logger.error { "OpenSong data directory is not set!" }
@@ -62,5 +67,10 @@ class OpenSongTextProvider(
                 }
             }.run()
         }
+    }
+
+    override fun stop() {
+        job?.cancel()
+        serviceJob?.cancel()
     }
 }

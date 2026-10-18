@@ -1,4 +1,4 @@
-package bg.emanuil
+package bg.emanuil.examples
 
 
 import bg.emanuil.draw.SkiaNDIStreamer

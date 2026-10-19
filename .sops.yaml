@@ -2,11 +2,13 @@ keys:
   - &nprodanov age1zpwfwk3g7u73cy3769hmteyhsn4ahdzyz6pnw29apsnaahz7je3qxzd6gm
   - &stream-pc age1x2mpwjz9nzgkenn8wg3k2vl7v57utlt6rrydyev7xfdzwltagpgquuje06
   - &presenter-pc age1sp223z0ccg05gf704nssdmnrag7459qq0ez947lsn0gdsxd8p3xssud7ur
+  - &work-vm age1f03nhwqva569nkcwstev5z7gej3t4feawsezzzdnsx3yynwtwf5q4uesls
 
 creation_rules:
   - path_regex: \.env$
     key_groups:
       - age:
+        - *work-vm
         - *nprodanov
         - *stream-pc
         - *presenter-pc

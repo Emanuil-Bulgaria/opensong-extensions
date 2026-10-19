@@ -18,7 +18,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -54,7 +57,8 @@ fun LowerThirdsScriptureInternal(title: String?, body: String?) {
 
                     .clip(RoundedCornerShape(8))
                     .background(Color.White.copy(alpha = 0.9f))
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .padding(top = 8.dp, start = 8.dp),
                 horizontalAlignment = Alignment.Start) {
                 title?.let { title ->
                     Text(
@@ -62,8 +66,13 @@ fun LowerThirdsScriptureInternal(title: String?, body: String?) {
                         style = TextStyle(
                             color = Color(0xFFD99050),
                             fontWeight = FontWeight.Bold,
-                            fontSize = 26.sp,
-                            fontFamily = FontFamily.Serif
+                            fontSize = 40.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.1f),
+                                offset = Offset.Zero,
+                                blurRadius = 4f
+                            )
                         )
                     )
                 }
@@ -71,7 +80,8 @@ fun LowerThirdsScriptureInternal(title: String?, body: String?) {
                 BasicText(
                     style = TextStyle(
                         color = Color.Black,
-                        fontFamily = FontFamily.Serif
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.SemiBold
                     ),
                     text = body,
                     autoSize = textSize

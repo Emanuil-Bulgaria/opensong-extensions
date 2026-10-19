@@ -11,12 +11,18 @@ import androidx.compose.ui.window.Tray
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.isTraySupported
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import bg.emanuil.config.KoinKotlinLogger
 import bg.emanuil.config.modules
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.koin.compose.KoinApplication
 import org.koin.core.logger.Level
 import kotlin.system.exitProcess
+
+private val storeOwner = object: ViewModelStoreOwner {
+    override val viewModelStore = ViewModelStore()
+}
 
 fun main() {
     val logger = KotlinLogging.logger {}
@@ -31,9 +37,7 @@ fun main() {
                 val icon = rememberVectorPainter(Icons.Default.Android)
                 if(isTraySupported) {
                     Tray(icon = icon) {
-                        DropdownMenuItem(onClick = ::exitApplication) {
-                            Text(text = "Exit")
-                        }
+                        Item("Exit", onClick = ::exitApplication)
                     }
                 } else {
                     Window(

@@ -1,0 +1,15 @@
+{
+  "NDI": [
+    {
+      "name": "LowerThirdsSong",
+      "template": "LowerThirdsSong"
+    },
+    {
+      "name": "LowerThirdsScripture",
+      "template": "LowerThirdsScripture"
+    }
+  ],
+  "OpenSong": {
+    "DocumentsDirectory": "C:\\Users\\vmtest\\Documents"
+  }
+}

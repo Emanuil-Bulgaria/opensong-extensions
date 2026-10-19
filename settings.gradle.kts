@@ -14,7 +14,7 @@ project(":distributions:ndi-runtime-linux").projectDir = File("distributions/ndi
 include("distributions:ndi-runtime-windows")
 project(":distributions:ndi-runtime-windows").projectDir = File("distributions/ndi-runtime-windows")
 
-file(".env").takeIf { it.exists() }?.readLines()?.forEach { line ->
+file("$settingsDir/.env").takeIf { it.exists() }?.readLines()?.forEach { line ->
     val trimmed = line.trim()
     if (trimmed.isNotEmpty() && !trimmed.startsWith("#")) {
         val pos = trimmed.indexOf("=")
@@ -22,7 +22,7 @@ file(".env").takeIf { it.exists() }?.readLines()?.forEach { line ->
             val key = trimmed.substring(0, pos).trim()
             val value = trimmed.substring(pos + 1).trim()
 
-            if (System.getenv(key) == null) {
+            if (System.getenv(key) == null || "GITHUB_TOKEN" == key) {
                 System.setProperty(key, value)
             }
         }

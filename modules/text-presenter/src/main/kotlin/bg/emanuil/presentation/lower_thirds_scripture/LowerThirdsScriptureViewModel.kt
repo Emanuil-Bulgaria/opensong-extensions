@@ -2,7 +2,7 @@ package bg.emanuil.presentation.lower_thirds_scripture
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import bg.emanuil.draw.OpenSongRepository
+import bg.emanuil.opensong.OpenSongRepository
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.filterNotNull

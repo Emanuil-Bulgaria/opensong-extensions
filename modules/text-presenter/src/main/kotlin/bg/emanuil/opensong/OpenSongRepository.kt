@@ -1,7 +1,6 @@
-package bg.emanuil.draw
+package bg.emanuil.opensong
 
 import bg.emanuil.config.Service
-import bg.emanuil.opensong.OpenSongVerseSearcher
 import bg.emanuil.watcher.ConfigurationStore
 import bg.emanuil.watcher.OpenSongWatcher
 import bg.emanuil.watcher.config.OpenSongConfig
@@ -60,7 +59,9 @@ class OpenSongRepository(
 
             getVerse = OpenSongVerseSearcher(file)
 
-            OpenSongWatcher(file) { slideData ->
+            OpenSongWatcher(
+                scope = scope,
+                documents = file) { slideData ->
                 _title.update { slideData.title }
                 _body.update {
                     slideData.body }

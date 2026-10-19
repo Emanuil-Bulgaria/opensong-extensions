@@ -58,7 +58,7 @@ class OpenSongTextProvider(
                 return@launch
             }
 
-            OpenSongWatcher(file) { slideData ->
+            OpenSongWatcher(documents = file) { slideData ->
                 _state.update {
                     mapOf(
                         "OpenSongSlideBody" to slideData.body,

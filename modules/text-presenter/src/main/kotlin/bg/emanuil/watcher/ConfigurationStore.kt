@@ -1,9 +1,11 @@
 package bg.emanuil.watcher
 
+import bg.emanuil.config.Service
 import bg.emanuil.watcher.config.Configuration
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -14,14 +16,17 @@ import java.io.File
 import java.nio.file.Path
 import kotlin.time.Duration.Companion.seconds
 
-class ConfigurationStore(configPath: File = Path.of("config.json").toFile()) {
+class ConfigurationStore(configPath: File = Path.of("config.json").toFile())
+    : Service {
 
     private val logger = KotlinLogging.logger {}
 
+    private val scope = CoroutineScope(Dispatchers.IO)
+
     val state: StateFlow<Configuration> = fileWatcher(configPath)
-        .map { readFile(it) }
+        .map(::readFile)
         .stateIn(
-            CoroutineScope(Dispatchers.IO),
+            scope = scope,
             SharingStarted.WhileSubscribed(5000),
             Configuration())
 
@@ -37,5 +42,12 @@ class ConfigurationStore(configPath: File = Path.of("config.json").toFile()) {
         }
         val raw = file.readText()
         return json.decodeFromString(raw)
+    }
+
+    override fun start() {
+    }
+
+    override fun stop() {
+        scope.cancel()
     }
 }

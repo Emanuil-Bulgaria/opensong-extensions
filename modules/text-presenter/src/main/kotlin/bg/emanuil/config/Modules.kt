@@ -1,7 +1,7 @@
 package bg.emanuil.config
 
 import bg.emanuil.draw.ComposeNDIStreamer
-import bg.emanuil.draw.OpenSongRepository
+import bg.emanuil.opensong.OpenSongRepository
 import bg.emanuil.draw.OpenSongTextProvider
 import bg.emanuil.draw.TextProvider
 import bg.emanuil.examples.LowerThirdsExample
@@ -19,10 +19,10 @@ import org.koin.dsl.module
 
 val modules = module {
 
-    single { ConfigurationStore() }
+    service { ConfigurationStore() }
 
     serviceOf(::OpenSongRepository)
-    serviceOf(::OpenSongTextProvider).bind(TextProvider::class)
+//    serviceOf(::OpenSongTextProvider).bind(TextProvider::class)
     service(createdAtStart = true) {
         NDIStreamManager(get(ConfigurationStore::class), get())
     }
@@ -33,8 +33,8 @@ val modules = module {
 
     single {
         mapOf(
-            LowerThirdsExample::class.simpleName!! to LowerThirdsExample(getAll()),
-            ScriptureExample::class.simpleName!! to ScriptureExample(getAll()),
+//            LowerThirdsExample::class.simpleName!! to LowerThirdsExample(getAll()),
+//            ScriptureExample::class.simpleName!! to ScriptureExample(getAll()),
             "LowerThirdsSong" to ComposeNDIStreamer({ LowerThirdsSong() }),
             "LowerThirdsScripture" to ComposeNDIStreamer({ LowerThirdsScripture() })
         )

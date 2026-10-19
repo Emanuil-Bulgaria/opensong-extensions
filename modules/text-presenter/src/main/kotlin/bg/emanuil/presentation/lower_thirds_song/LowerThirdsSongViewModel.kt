@@ -1,7 +1,7 @@
 package bg.emanuil.presentation.lower_thirds_song
 
 import androidx.lifecycle.ViewModel
-import bg.emanuil.draw.OpenSongRepository
+import bg.emanuil.opensong.OpenSongRepository
 
 class LowerThirdsSongViewModel(
     repository: OpenSongRepository

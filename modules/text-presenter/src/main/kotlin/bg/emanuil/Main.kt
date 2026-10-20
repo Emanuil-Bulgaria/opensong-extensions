@@ -2,7 +2,6 @@ package bg.emanuil
 
 
 import androidx.compose.material.Button
-import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android

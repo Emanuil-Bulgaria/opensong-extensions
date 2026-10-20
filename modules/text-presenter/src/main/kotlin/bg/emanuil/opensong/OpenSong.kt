@@ -9,7 +9,8 @@ import bg.emanuil.opensong.model.x_bible_format.OpenBibleFormat
 fun Bible.toVerseMap() = this.books.flatMap { book ->
     book.chapters.flatMap { chapter ->
         chapter.verses.map { verse ->
-            verse.text to "${book.name} ${chapter.number}:${verse.number}"
+            val text = verse.text.replace(Regex("\\s+"), " ")
+            text to "${book.name} ${chapter.number}:${verse.number}"
         }
     }
 }.toMap()
